@@ -3,6 +3,7 @@ import inspect
 import logging
 from importlib import import_module
 
+from django.apps import apps
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
@@ -34,7 +35,7 @@ def setting(name, default=None, strict=False):
 
 def autodiscover_module(module_name, app_name=None):
     logger.info('Autodiscovering anonymizers modules ...')
-    apps_to_search = [app_name] if app_name else settings.INSTALLED_APPS
+    apps_to_search = [app_name] if app_name else [app.name for app in apps.get_app_configs()]
     modules = []
     for app in apps_to_search:
         try:
