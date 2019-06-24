@@ -5,7 +5,6 @@ import logging
 from tqdm import tqdm
 from six import string_types
 from django.conf import settings
-from bulk_update.helper import bulk_update
 from faker import Faker
 
 
@@ -37,7 +36,7 @@ class BaseAnonymizer:
     def run(self, batch_size):
         instances = self.get_query_set()
         instances_processed, count_instances, count_fields = self._process_instances(instances)
-        bulk_update(instances_processed, update_fields=[attrs[0] for attrs in self.attributes], batch_size=batch_size)
+        self.model.objects.bulk_update(instances_processed, [attrs[0] for attrs in self.attributes], batch_size=batch_size)
         return len(self.attributes), count_instances, count_fields
 
     def _process_instances(self, instances):

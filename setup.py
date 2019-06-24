@@ -52,8 +52,7 @@ setup(
     description='Command to anonymize sensitive data.',
     long_description=get_long_description(),
     install_requires=[
-        'Django>=1.8',
-        'django-bulk-update>=2.2.0',
+        'Django>=2.2',
         'Faker>=0.8.13',
         'six',
         'tqdm>=4.23.4',
