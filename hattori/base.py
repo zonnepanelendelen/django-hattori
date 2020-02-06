@@ -61,7 +61,7 @@ class BaseAnonymizer:
 
     @staticmethod
     def get_allowed_value(replacer, model_instance, field_name):
-        retval = replacer()
+        retval = replacer(model_instance, field_name)
         max_length = model_instance._meta.get_field(field_name).max_length
         if max_length:
             retval = retval[:max_length]
