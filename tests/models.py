@@ -7,6 +7,7 @@ class Person(models.Model):
 
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, default='')
 
     class Meta:
         verbose_name = 'Person'

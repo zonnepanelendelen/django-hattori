@@ -2,8 +2,8 @@
 
 import pytest
 
-from model_mommy import mommy
-from model_mommy.recipe import seq
+from model_bakery import baker
+from model_bakery.recipe import seq
 from tests.models import Person
 from django.core.management import call_command
 
@@ -13,7 +13,7 @@ class TestCommand(object):
 
     @staticmethod
     def data(num_items=10):
-        return mommy.make(Person, first_name=seq('first_name-'), last_name=seq('last_name-'), _quantity=num_items)
+        return baker.make(Person, first_name=seq('first_name-'), last_name=seq('last_name-'), _quantity=num_items)
 
     def test_data_creation(self):
         self.data()
@@ -30,3 +30,4 @@ class TestCommand(object):
         assert Person.objects.filter(first_name__startswith='first_name-').exists()
         call_command('anonymize_db')
         assert not Person.objects.filter(first_name__startswith='first_name-').exists()
+        assert not Person.objects.exclude(description='fix string').exists()

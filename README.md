@@ -38,7 +38,7 @@ Possible arguments:
 
 * ```-a, --app```: Define a app you want to anonymize. All anonymizers in this app will be run. Eg. ```anonymize_db -a shop```
 * ```-m, --models```: List of models you want to anonymize. Eg. ```anonymize_db -m Customer,Product```
-* ```-b, --batch-size```: batch size used in the bulk_update of the instances. Depends on the DB machine, default use 500.
+* ```-b, --batch-size```: number of rows streamed and written per round trip for callable replacers. Depends on the DB machine, default use 500.
 
 
 ## Writing anonymizers

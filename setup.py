@@ -54,7 +54,6 @@ setup(
     install_requires=[
         'Django>=2.2',
         'Faker>=0.8.13',
-        'six',
         'tqdm>=4.23.4',
     ],
     classifiers=[
