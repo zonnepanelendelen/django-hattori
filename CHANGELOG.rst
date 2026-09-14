@@ -25,3 +25,13 @@ Change log
 
 * Added tests
 * Small code refactors
+
+
+0.3.0 (2026-09-14)
+------------------
+
+* Non-callable replacers (strings, ``None``, dicts, Django expressions) are written with a single ``UPDATE`` per model.
+* Callable replacers stream rows with ``iterator()`` and write plain ``UPDATE ... WHERE pk = %s`` statements through ``executemany`` instead of ``bulk_update`` (whose ``CASE WHEN`` is quadratic in the batch size).
+* The primary key is captured before replacers run, so a primary key column can itself be replaced.
+* ``get_allowed_value`` no longer fails when a replacer returns ``None`` for a field with ``max_length``.
+* Dropped the ``six`` dependency.
